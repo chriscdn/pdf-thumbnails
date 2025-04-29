@@ -1,0 +1,34 @@
+{
+  "name": "@chriscdn/pdf-thumbnails",
+  "version": "0.0.1",
+  "description": "PDF Thumbnail Generation",
+  "repository": "https://github.com/chriscdn/pdf-thumbnails",
+  "author": "Christopher Meyer <chris@schwiiz.org>",
+  "license": "MIT",
+  "type": "module",
+  "source": "./src/index.ts",
+  "module": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    "default": "./lib/index.js"
+  },
+  "scripts": {
+    "build": "rimraf ./lib/ && tsc",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@chriscdn/file-cache": "^0.0.5",
+    "@chriscdn/memoize": "^1.0.9",
+    "pdf-lib": "^1.17.1",
+    "rimraf": "^6.0.1",
+    "temp": "^0.9.4"
+  },
+  "devDependencies": {
+    "@chriscdn/duration": "^1.0.3",
+    "@tsconfig/node22": "^22.0.1",
+    "@types/node": "^22.15.3",
+    "@types/temp": "^0.9.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.2"
+  }
+}
