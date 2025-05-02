@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@chriscdn/duration/-/duration-1.0.3.tgz#2b936422c729cb344bab218363b74eabfa5120d1"
   integrity sha512-t/EGNi53eOSUUgm9yPb9X+aj1pPo8rkhQBHSm0qWAnGL/UbTRbZTnmqpXAb28x16MpBbOTnecyVQDP7e+uYpVQ==
 
-"@chriscdn/file-cache@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@chriscdn/file-cache/-/file-cache-0.0.5.tgz#998fe6f6ae093fa290887ef40a6a892c70e3e225"
-  integrity sha512-PA9sB8C65wJDtC0r0o7UpFm+KCb1i1Ie7VeieEr72rP+Z3NV0LHkncbMc7pw18ib+nBYNuPGwKBIb438wxb/LA==
+"@chriscdn/file-cache@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@chriscdn/file-cache/-/file-cache-0.0.6.tgz#ace4480a31ec7ebbc0820491bd0949239d5de539"
+  integrity sha512-+AsUczCv9GFOhfA73VTflLOxN5nwP/n6gbkghtCSVyU99qZNOVK8zgmOyS2pvpmqP9/hGpsMmE7Ffv/Mdh9UIg==
   dependencies:
     "@chriscdn/duration" "^1.0.3"
     "@chriscdn/find-nuke" "^0.0.4"
