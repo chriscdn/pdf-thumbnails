@@ -7,14 +7,14 @@ export type PDFThumbnailFileCacheOptions = Omit<FileCacheOptions<PDFArgs>, "cb" 
     quality?: number;
     pdftoppm?: FilePath;
     convert?: FilePath;
+    scaleTo?: number;
+    scaleToX?: number;
+    scaleToY?: number;
 };
 /**
  * Extend FileCache with a few default options.
  */
 declare class PDFThumbnailFileCache extends FileCache<PDFArgs> {
-    private _quality;
-    private _pdftoppm;
-    private _convert;
     /**
      * Override the constructor to default the `ext` and `cb` parameters.
      *

@@ -54,11 +54,23 @@ const _changeFileExtension = (
 };
 
 const pdfToThumbnails = async (
-    { pdfFilePath, convert, pdftoppm, quality, range }: {
+    {
+        pdfFilePath,
+        convert,
+        pdftoppm,
+        quality,
+        scaleTo,
+        scaleToX,
+        scaleToY,
+        range,
+    }: {
         pdfFilePath: FilePath;
         convert: FilePath;
         pdftoppm: FilePath;
         quality: number;
+        scaleTo?: number;
+        scaleToX?: number;
+        scaleToY?: number;
         range: [number, number];
     },
 ) => {
@@ -75,9 +87,15 @@ const pdfToThumbnails = async (
         const ppmRoot = path.resolve(_thumbnailPath, suffix);
 
         await execPromise(
-            `${pdftoppm} -f ${range[0]} -l ${
-                range[1]
-            } ${pdfFilePath} ${ppmRoot}`,
+            `${pdftoppm} \
+                -f ${range[0]} \
+                -l ${range[1]} \
+                ${scaleTo ? `-scale-to ${scaleTo}` : ""} \
+                ${scaleToX ? `-scale-to-x ${scaleToX}` : ""} \
+                ${scaleToY ? `-scale-to-y ${scaleToY}` : ""} \
+                ${pdfFilePath} \
+                ${ppmRoot} \
+                `,
         );
 
         const ppmPaths = await _normalizePPMFileNames(

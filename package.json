@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@chriscdn/file-cache": "^0.0.5",
-    "@chriscdn/memoize": "^1.0.9",
     "pdf-lib": "^1.17.1",
     "rimraf": "^6.0.1",
     "temp": "^0.9.4"

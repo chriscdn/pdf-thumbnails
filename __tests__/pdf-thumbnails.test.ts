@@ -10,6 +10,7 @@ const cache = new PDFThumbnailFileCache({
     cachePath: await temp.mkdir("file-cache-test"),
     ttl: Duration.toMilliseconds({ seconds: 1 }),
     cleanupInterval: Duration.toMilliseconds({ seconds: 2 }),
+    // scaleTo: 100,
 });
 
 // describe("Cache Expiration", async () => {

@@ -74,7 +74,13 @@ const thumbnailFilePath = await thumbnailCache.getFile({
 // /tmp/thumbnails/d/b/c/dbc7181baf54aa79b182142f12a8bee77068c74b.jpg
 ```
 
-The JPG file paths are determined by hashing the input parameters to `getFile`. To avoid caching conflicts, it's important to use a unique file path for different PDF files.
+**NOTE:** The JPG file paths are determined by hashing the input parameters to `getFile`. To avoid caching conflicts, it's important to use a unique file path for different PDF files.
+
+A `pageCount` method exists to retrieve the number of pages in a PDF:
+
+```ts
+const pageCount: number = await thumbnailCache.pageCount("/some/pdf/file.pdf");
+```
 
 ## Cleanup
 
