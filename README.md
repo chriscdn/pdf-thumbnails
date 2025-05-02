@@ -1,6 +1,6 @@
 # @chriscdn/pdf-thumbnails
 
-This package generates and caches thumbnails of a PDF file.
+This package generates and caches thumbnail images of a PDF file.
 
 ## Installation
 
