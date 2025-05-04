@@ -7,15 +7,15 @@
   resolved "https://registry.yarnpkg.com/@chriscdn/duration/-/duration-1.0.3.tgz#2b936422c729cb344bab218363b74eabfa5120d1"
   integrity sha512-t/EGNi53eOSUUgm9yPb9X+aj1pPo8rkhQBHSm0qWAnGL/UbTRbZTnmqpXAb28x16MpBbOTnecyVQDP7e+uYpVQ==
 
-"@chriscdn/file-cache@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@chriscdn/file-cache/-/file-cache-0.0.6.tgz#ace4480a31ec7ebbc0820491bd0949239d5de539"
-  integrity sha512-+AsUczCv9GFOhfA73VTflLOxN5nwP/n6gbkghtCSVyU99qZNOVK8zgmOyS2pvpmqP9/hGpsMmE7Ffv/Mdh9UIg==
+"@chriscdn/file-cache@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@chriscdn/file-cache/-/file-cache-0.0.7.tgz#f17d08f9e412d6a9d259f6e4362b42631ee10677"
+  integrity sha512-OtDURltn97OyaIMXL1ZL+ypD0QXLWKmdgI9iDJTANOzLSU38ptGww+4r1Qb4jnO8FBtkvd+3aOXa8J7pTxnoiQ==
   dependencies:
     "@chriscdn/duration" "^1.0.3"
     "@chriscdn/find-nuke" "^0.0.4"
     "@chriscdn/memoize" "^1.0.9"
-    "@chriscdn/promise-semaphore" "^2.0.12"
+    "@chriscdn/promise-semaphore" "^3.0.1"
     path-exists "^5.0.0"
     rimraf "^6.0.1"
     sha1 "^1.1.1"
@@ -37,10 +37,10 @@
   dependencies:
     quick-lru "^7.0.1"
 
-"@chriscdn/promise-semaphore@^2.0.12":
-  version "2.0.12"
-  resolved "https://registry.yarnpkg.com/@chriscdn/promise-semaphore/-/promise-semaphore-2.0.12.tgz#f68070688b730f984100b3b994563f3c0b6a7e76"
-  integrity sha512-hgbaEg1n+q2ZKKBCrzjRK56pB+IDkj4tFHywz5aVq4sX+2nvyxmD/MuPO8ULe+xOpoCkS3djTliWnXUyGOi3Yg==
+"@chriscdn/promise-semaphore@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@chriscdn/promise-semaphore/-/promise-semaphore-3.0.1.tgz#143cfaec1ecf258acec950602d712723e47b120c"
+  integrity sha512-fVlCnoYE4hDzpcYRPtmN7dmcpmd2zxyPWjyfjIKI9Y+gsI7rwZSkjtuwMi8HFtlkSmNh8L7Zr37hdqeL13sYrw==
 
 "@esbuild/aix-ppc64@0.25.3":
   version "0.25.3"
