@@ -1,6 +1,6 @@
 {
   "name": "@chriscdn/pdf-thumbnails",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "PDF Thumbnail Generation",
   "repository": "https://github.com/chriscdn/pdf-thumbnails",
   "author": "Christopher Meyer <chris@schwiiz.org>",
