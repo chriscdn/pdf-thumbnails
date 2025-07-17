@@ -25,9 +25,9 @@
   "devDependencies": {
     "@chriscdn/duration": "^1.0.3",
     "@tsconfig/node22": "^22.0.2",
-    "@types/node": "^22.15.30",
+    "@types/node": "^24.0.14",
     "@types/temp": "^0.9.4",
     "typescript": "^5.8.3",
-    "vitest": "^3.2.2"
+    "vitest": "^3.2.4"
   }
 }

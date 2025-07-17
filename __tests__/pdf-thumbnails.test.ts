@@ -4,7 +4,7 @@ import { Duration } from "@chriscdn/duration";
 import temp from "temp";
 
 const pdfFilePath = "./__tests__/pdfs/lorem.pdf";
-const pause = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+// const pause = async (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const cache = new PDFThumbnailFileCache({
     cachePath: await temp.mkdir("file-cache-test"),
