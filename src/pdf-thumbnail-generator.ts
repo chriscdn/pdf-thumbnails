@@ -2,7 +2,7 @@ import temp from "temp";
 import { promisify } from "util";
 import { exec as _exec } from "child_process";
 import path from "path";
-import { promises as fs } from "fs";
+import fs from "fs/promises";
 import { rimraf } from "rimraf";
 import { FilePath } from "@chriscdn/file-cache";
 
@@ -45,13 +45,12 @@ const _normalizePPMFileNames = async (
 const _changeFileExtension = (
     filePath: FilePath,
     newExtension: string,
-): FilePath => {
-    return path.format({
+): FilePath =>
+    path.format({
         dir: path.dirname(filePath),
         name: path.basename(filePath, path.extname(filePath)),
         ext: newExtension,
     });
-};
 
 const pdfToThumbnails = async (
     {

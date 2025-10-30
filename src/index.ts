@@ -4,7 +4,7 @@ import {
     type FilePath,
 } from "@chriscdn/file-cache";
 import { pdfToThumbnails } from "./pdf-thumbnail-generator.js";
-import { promises as fs } from "fs";
+import fs from "fs/promises";
 import { PDFDocument } from "pdf-lib";
 
 const pageCount = async (filePath: FilePath): Promise<number> => {
@@ -84,30 +84,8 @@ class PDFThumbnailFileCache extends FileCache<PDFArgs> {
                 );
 
                 await fs.copyFile(filePaths[0], filePath);
-
-                /*
-                // this was an attempt to batch process all items in a pdf.. but
-                // single is faster
-
-                await Promise.all(filePaths.map(async (filePath, index) => {
-                    const targetCacheFilePath = await cache .resolveFilePath({
-                    pdfFilePath, pageNumber: index,
-                        });
-
-                    await fs.mkdir(path.dirname(targetCacheFilePath), {
-                        recursive: true,
-                    });
-
-                    // do not rename since they may exist on different volumes
-                    await fs.copyFile(filePath, targetCacheFilePath);
-                }));
-                */
             },
         });
-
-        // this._quality = args.quality ?? 70;
-        // this._pdftoppm = args.pdftoppm ?? "pdftoppm";
-        // this._convert = args.convert ?? "convert";
     }
 
     /**
