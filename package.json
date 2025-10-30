@@ -7,26 +7,28 @@
   "license": "MIT",
   "type": "module",
   "source": "./src/index.ts",
-  "module": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "./lib/pdf-thumbnail.cjs",
+  "module": "./lib/pdf-thumbnail.module.js",
   "exports": {
-    "default": "./lib/index.js"
+    "types": "./lib/index.d.ts",
+    "require": "./lib/pdf-thumbnail.cjs",
+    "default": "./lib/pdf-thumbnail.modern.js"
   },
+  "types": "./lib/index.d.ts",
   "scripts": {
-    "build": "rimraf ./lib/ && tsc",
+    "build": "rm -rf ./lib/ && microbundle --target node --format modern,esm,cjs",
     "test": "vitest"
   },
   "dependencies": {
-    "@chriscdn/file-cache": "^0.0.13",
+    "@chriscdn/file-cache": "^0.0.14",
     "pdf-lib": "^1.17.1",
     "rimraf": "^6.0.1",
     "temp": "^0.9.4"
   },
   "devDependencies": {
     "@chriscdn/duration": "^1.0.3",
-    "@tsconfig/node22": "^22.0.2",
-    "@types/node": "^24.9.2",
     "@types/temp": "^0.9.4",
+    "microbundle": "^0.15.1",
     "typescript": "^5.9.3",
     "vitest": "^4.0.5"
   },
