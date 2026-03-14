@@ -12,81 +12,79 @@ const ppmExtension = ".ppm";
 const jpgExtension = ".jpg";
 
 const numberToSuffix = (n: number, ext = "") =>
-    `${n.toString().padStart(7, "0")}${ext}`;
+  `${n.toString().padStart(7, "0")}${ext}`;
 
 const _normalizePPMFileNames = async (
-    folder: string,
-    prefix: string,
+  folder: string,
+  prefix: string,
 ): Promise<FilePath[]> => {
-    const files = await fs.readdir(folder);
+  const files = await fs.readdir(folder);
 
-    const filteredFiles = files.filter((file) =>
-        file.startsWith(prefix) && file.endsWith(ppmExtension)
-    )
-        .sort((a, b) => a.localeCompare(b));
+  const filteredFiles = files
+    .filter((file) => file.startsWith(prefix) && file.endsWith(ppmExtension))
+    .sort((a, b) => a.localeCompare(b));
 
-    return await Promise.all(
-        filteredFiles.map(async (file, index) => {
-            const newName = `${prefix}${numberToSuffix(index, ppmExtension)}`;
+  return await Promise.all(
+    filteredFiles.map(async (file, index) => {
+      const newName = `${prefix}${numberToSuffix(index, ppmExtension)}`;
 
-            const oldPath = path.join(folder, file);
-            const newPath = path.join(folder, newName);
+      const oldPath = path.join(folder, file);
+      const newPath = path.join(folder, newName);
 
-            // Rename asynchronously only if the names are different
-            if (file !== newName) {
-                await fs.rename(oldPath, newPath);
-            }
+      // Rename asynchronously only if the names are different
+      if (file !== newName) {
+        await fs.rename(oldPath, newPath);
+      }
 
-            return newPath;
-        }),
-    );
+      return newPath;
+    }),
+  );
 };
 
 const _changeFileExtension = (
-    filePath: FilePath,
-    newExtension: string,
+  filePath: FilePath,
+  newExtension: string,
 ): FilePath =>
-    path.format({
-        dir: path.dirname(filePath),
-        name: path.basename(filePath, path.extname(filePath)),
-        ext: newExtension,
-    });
+  path.format({
+    dir: path.dirname(filePath),
+    name: path.basename(filePath, path.extname(filePath)),
+    ext: newExtension,
+  });
 
-const pdfToThumbnails = async (
-    {
-        pdfFilePath,
-        convert,
-        pdftoppm,
-        quality,
-        scaleTo,
-        scaleToX,
-        scaleToY,
-        range,
-    }: {
-        pdfFilePath: FilePath;
-        convert: FilePath;
-        pdftoppm: FilePath;
-        quality: number;
-        scaleTo?: number;
-        scaleToX?: number;
-        scaleToY?: number;
-        range: [number, number];
-    },
-) => {
-    const _thumbnailPath = await temp.mkdir("pdf-thumbnails");
+const pdfToThumbnails = async ({
+  pdfFilePath,
+  convert,
+  pdftoppm,
+  quality,
+  scaleTo,
+  scaleToX,
+  scaleToY,
+  range,
+}: {
+  pdfFilePath: FilePath;
+  convert: FilePath;
+  pdftoppm: FilePath;
+  quality: number;
+  scaleTo: number | undefined;
+  scaleToX: number | undefined;
+  scaleToY: number | undefined;
+  range: [number, number];
+}) => {
+  // This creates a new directory each time!
+  const _thumbnailPath = await temp.mkdir("pdf-thumbnails");
 
-    const suffix = path.basename(pdfFilePath);
-    const suffix2 = `${suffix}-`;
+  const suffix = path.basename(pdfFilePath);
+  const suffix2 = `${suffix}-`;
 
-    let filePaths = (await fs.readdir(_thumbnailPath)).filter((file) =>
-        path.extname(file) === jpgExtension
-    );
+  let filePaths = (await fs.readdir(_thumbnailPath)).filter(
+    (file) => path.extname(file) === jpgExtension,
+  );
 
-    if (filePaths.length === 0) {
-        const ppmRoot = path.resolve(_thumbnailPath, suffix);
+  if (filePaths.length === 0) {
+    const ppmRoot = path.resolve(_thumbnailPath, suffix);
 
-        await execPromise(
-            `${pdftoppm} \
+    await execPromise(
+      `${pdftoppm} \
                 -f ${range[0]} \
                 -l ${range[1]} \
                 ${scaleTo ? `-scale-to ${scaleTo}` : ""} \
@@ -95,34 +93,28 @@ const pdfToThumbnails = async (
                 ${pdfFilePath} \
                 ${ppmRoot} \
                 `,
+    );
+
+    const ppmPaths = await _normalizePPMFileNames(_thumbnailPath, suffix2);
+
+    filePaths = await Promise.all(
+      ppmPaths.map(async (ppmFilePath) => {
+        // should always be .ppm -> .jpg
+        const jpgFilePath = _changeFileExtension(ppmFilePath, jpgExtension);
+
+        await execPromise(
+          `${convert} -quality ${quality} ${ppmFilePath} ${jpgFilePath}`,
         );
 
-        const ppmPaths = await _normalizePPMFileNames(
-            _thumbnailPath,
-            suffix2,
-        );
+        // fire and forget, delete and fail silently
+        rimraf(ppmFilePath).catch((_) => {});
 
-        filePaths = await Promise.all(
-            ppmPaths.map(async (ppmFilePath) => {
-                // should always be .ppm -> .jpg
-                const jpgFilePath = _changeFileExtension(
-                    ppmFilePath,
-                    jpgExtension,
-                );
+        return jpgFilePath;
+      }),
+    );
+  }
 
-                await execPromise(
-                    `${convert} -quality ${quality} ${ppmFilePath} ${jpgFilePath}`,
-                );
-
-                // fire and forget, delete and fail silently
-                rimraf(ppmFilePath).catch((_) => {});
-
-                return jpgFilePath;
-            }),
-        );
-    }
-
-    return filePaths;
+  return filePaths;
 };
 
 export { pdfToThumbnails };

@@ -1,9 +1,10 @@
-import { FileCache, FileCacheOptions, type FilePath } from "@chriscdn/file-cache";
+import { FileCache, FilePath, FileCacheOptions } from '@chriscdn/file-cache';
+
 type PDFArgs = {
     pdfFilePath: FilePath;
     pageIndex: number;
 };
-export type PDFThumbnailFileCacheOptions = Omit<FileCacheOptions<PDFArgs>, "cb" | "ext"> & {
+type PDFThumbnailFileCacheOptions = Omit<FileCacheOptions<PDFArgs>, "cb" | "ext"> & {
     quality?: number;
     pdftoppm?: FilePath;
     convert?: FilePath;
@@ -29,4 +30,5 @@ declare class PDFThumbnailFileCache extends FileCache<PDFArgs> {
      */
     pageCount(pdfFilePath: FilePath): Promise<number>;
 }
-export { PDFThumbnailFileCache };
+
+export { PDFThumbnailFileCache, type PDFThumbnailFileCacheOptions };
