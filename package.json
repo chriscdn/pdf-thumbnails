@@ -29,5 +29,9 @@
   },
   "files": [
     "lib"
+  ],
+  "keywords": [
+    "pdf",
+    "thumbnail"
   ]
 }
